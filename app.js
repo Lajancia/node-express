@@ -8,6 +8,7 @@ const dotenv = require('dotenv');
 
 dotenv.config();
 const pageRouter = require('./routes/page');
+const {sequelize}=require('./models')
 
 const app = express();
 app.set('port', process.env.PORT || 8001); //개발할 때는 8001 베포는 다르게 할 예정
@@ -16,6 +17,15 @@ nunjucks.configure('views', {
   express: app,
   watch: true,
 });
+
+sequelize.sync({ force: false }) //alter도 있지만 에러가 날 수 있음, force:false는 개발 때만
+  .then(() => {
+    console.log('데이터베이스 연결')
+  })
+  .catch((err) => {
+    console.error(err);
+  });
+//서버 실행되면서 실행
 
 app.use(morgan('dev'));
 app.use(express.static(path.join(__dirname, 'public')));

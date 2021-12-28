@@ -11,9 +11,9 @@ const sequelize = new Sequelize(
 );
 
 db.sequelize = sequelize;
-db.User = User;
+db.User = User; //팔로잉 팔로워 다대다
 db.Post = Post;
-db.Hashtag = Hashtag;
+db.Hashtag = Hashtag; // 해쉬테그 검색
 
 User.init(sequelize);
 Post.init(sequelize);

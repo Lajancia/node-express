@@ -25,6 +25,6 @@ module.exports = class Post extends Sequelize.Model {
 
   static associate(db) {
     db.Post.belongsTo(db.User);
-    db.Post.belongsToMany(db.Hashtag, { through: 'PostHashtag' });
+    db.Post.belongsToMany(db.Hashtag, { through: 'PostHashtag' }); //다대다 필연적으로 중간 테이블이 생김 through로 만듦
   }
 };
