@@ -43,6 +43,7 @@ app.use(session({
 }));
 
 app.use('/', pageRouter); //페이지 라우터 연결
+app.use('/auth',authRouter)
 
 app.use((req, res, next) => { //404 처리
   const error =  new Error(`${req.method} ${req.url} 라우터가 없습니다.`);
