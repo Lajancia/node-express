@@ -6,7 +6,7 @@ const User = require('../models/user');
 
 const router = express.Router();
 
-router.post('/join', isNotLoggedIn, async (req, res, next) => {
+router.post('/join', isNotLoggedIn, async (req, res, next) => { //로그인 안한 사람만 접근 가능
   const { email, nick, password } = req.body; //기존에 이메일로 가입한 사람이 있나 체크
   try {
     const exUser = await User.findOne({ where: { email } });
