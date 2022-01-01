@@ -4,11 +4,11 @@ module.exports = class Post extends Sequelize.Model {
   static init(sequelize) {
     return super.init({
       content: {
-        type: Sequelize.STRING(140), //140글자 제한
+        type: Sequelize.STRING(140),
         allowNull: false,
       },
       img: {
-        type: Sequelize.STRING(200), //사진은 한개만 올릴 수 있음
+        type: Sequelize.STRING(200),
         allowNull: true,
       },
     }, {
@@ -25,6 +25,6 @@ module.exports = class Post extends Sequelize.Model {
 
   static associate(db) {
     db.Post.belongsTo(db.User);
-    db.Post.belongsToMany(db.Hashtag, { through: 'PostHashtag' }); //다대다 필연적으로 중간 테이블이 생김 through로 만듦
+    db.Post.belongsToMany(db.Hashtag, { through: 'PostHashtag' });
   }
 };

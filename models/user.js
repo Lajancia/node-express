@@ -2,9 +2,9 @@ const Sequelize = require('sequelize');
 
 module.exports = class User extends Sequelize.Model {
   static init(sequelize) {
-    return super.init({ //이대로 테이블이 만들어짐, 시퀄라이즈에서는 아이디가 생략
+    return super.init({
       email: {
-        type: Sequelize.STRING(40), //이메일은 40글자까지
+        type: Sequelize.STRING(40),
         allowNull: true,
         unique: true,
       },
@@ -13,26 +13,26 @@ module.exports = class User extends Sequelize.Model {
         allowNull: false,
       },
       password: {
-        type: Sequelize.STRING(100), //해시화되면 너무 길어짐
-        allowNull: true, //sns로 로그인할경우
+        type: Sequelize.STRING(100),
+        allowNull: true,
       },
       provider: {
         type: Sequelize.STRING(10),
         allowNull: false,
-        defaultValue: 'local', //로그인한 장소. 카카오 네이버 등등
+        defaultValue: 'local',
       },
       snsId: {
-        type: Sequelize.STRING(30),//sns 중 특정 플렛폼 아이디 비번으로 로그인할 경우
+        type: Sequelize.STRING(30),
         allowNull: true,
       },
     }, {
       sequelize,
-      timestamps: true, //생성 수정 삭제일 기록
+      timestamps: true,
       underscored: false,
       modelName: 'User',
       tableName: 'users',
-      paranoid: true, //휴면계정을 위한 것
-      charset: 'utf8', //한글 지원
+      paranoid: true,
+      charset: 'utf8',
       collate: 'utf8_general_ci',
     });
   }
@@ -40,13 +40,13 @@ module.exports = class User extends Sequelize.Model {
   static associate(db) {
     db.User.hasMany(db.Post);
     db.User.belongsToMany(db.User, {
-      foreignKey: 'followingId', //왜래키
-      as: 'Followers', //자바스크립트에서 쓰는 값
-      through: 'Follow', //중간 테이블
+      foreignKey: 'followingId',
+      as: 'Followers',
+      through: 'Follow',
     });
     db.User.belongsToMany(db.User, {
-      foreignKey: 'followerId', 
-      as: 'Followings',//외래키와 반대가 돼야 함
+      foreignKey: 'followerId',
+      as: 'Followings',
       through: 'Follow',
     });
   }

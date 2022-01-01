@@ -16,7 +16,7 @@ const authRouter = require('./routes/auth');
 const postRouter = require('./routes/post');
 const {sequelize}=require('./models')
 const passportConfig = require('./passport');
-
+const userRouter=require('./routes/user')
 
 const app = express();
 app.set('port', process.env.PORT || 8001); //개발할 때는 8001 베포는 다르게 할 예정
@@ -58,7 +58,8 @@ app.use(passport.session());//deserializeuser가 실행됨->세션쿠키 전송
 
 app.use('/', pageRouter); //페이지 라우터 연결
 app.use('/auth', authRouter)
-app.use('/post',postRouter)
+app.use('/post', postRouter)
+app.use('/user',userRouter)
 
 app.use((req, res, next) => { //404 처리
   const error =  new Error(`${req.method} ${req.url} 라우터가 없습니다.`);
