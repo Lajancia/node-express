@@ -19,7 +19,7 @@ const passportConfig = require('./passport');
 const userRouter=require('./routes/user')
 
 const app = express();
-app.set('port', process.env.PORT || 8001); //개발할 때는 8001 베포는 다르게 할 예정
+app.set('port', process.env.PORT || 8080); //개발할 때는 8001 베포는 다르게 할 예정
 app.set('view engine', 'html'); //넌적스 사용 방법이다. 추후 vue나 리액트로 변경하자.
 nunjucks.configure('views', {
   express: app,
